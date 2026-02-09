@@ -7,7 +7,7 @@
  */
 
 #include "bsp.h"
-#include "../drivers/hal_uart.h"
+#include "../drivers/inc/hal_uart.h"
 
 /**
  * @brief Board UART instance (USART2 on STM32F411RE Nucleo)
