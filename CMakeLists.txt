@@ -1,16 +1,24 @@
 cmake_minimum_required(VERSION 3.15)
-project(sv_training C ASM)
 
-# Set C standard
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED ON)
+project(training_app C ASM)
 
-# Set toolchain file if provided
-if(DEFINED CMAKE_TOOLCHAIN_FILE)
-    include(${CMAKE_TOOLCHAIN_FILE})
-endif()
+add_executable(training_app
+    ${CMAKE_SOURCE_DIR}/app/main.c
+    ${STARTUP_FILE}
+)
 
-# Add subdirectories
-add_subdirectory(drivers)
-add_subdirectory(bsp)
-add_subdirectory(app)
+target_include_directories(training_app PRIVATE
+    ${CMAKE_SOURCE_DIR}/hal/inc
+)
+
+target_link_libraries(training_app
+    PRIVATE hal        # App only links against HAL
+)
+
+add_subdirectory(bsp)      # BSP first (provides config)
+add_subdirectory(drivers)  # Drivers second
+add_subdirectory(hal)      # HAL last (uses drivers + bsp)
+add_subdirectory(app)      # App uses HAL
+
+add_custom_command(TARGET training_app POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary training_app training_app.bin)
