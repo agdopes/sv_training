@@ -66,6 +66,8 @@ The following are the generic API for the RCC peripheral
 * `rcc_status rcc_clock_initialize( const rcc_clockConfig *rccClkConfig )`
 * `rcc_status rcc_pll_initialize( const pll_configuration *pllConfig )`
 
+![RCC Peripheral](rendered_uml/rcc.png)
+
 ```plantuml
 @startuml
 
@@ -108,3 +110,4 @@ rccClass --> rcc_pll_initialize
 
 @enduml
 ```
+
