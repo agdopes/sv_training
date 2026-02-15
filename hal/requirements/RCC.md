@@ -5,16 +5,16 @@ This contains the basic requirements for the RCC peripheral and the high level d
 
 ## Requirements
 ### Must-have requirements
-* MREQ.1 - The RCC peripheral must be able to initialize and de-initialize its block
-* MREQ.2 - Must return appropriate status messages to determine the state of the peripheral
-* MREQ.3 - Handle the appropriate status messages
-* MREQ.4 - Set the main clock of the MCU to 8MHz
+* **MREQ.1** - The RCC peripheral must be able to initialize and de-initialize its block
+* **MREQ.2** - Must return appropriate status messages to determine the state of the peripheral
+* **MREQ.3** - Handle the appropriate status messages
+* **MREQ.4** - Set the main clock of the MCU to 8MHz
     * This will be the basis for the UART, GPIO, and TIMER peripherals
-* MREQ.5 - Support the retreival of the current clock value
+* **MREQ.5** - Support the retreival of the current clock value
 
 ### Nice-to-have requirements
-* NREQ.1 - Use the PLL block if the MCU supports it.
-    * NREQ.1.1 - Use the PLL block to multiply the MCU clock from 8MHz to 64MHz
+* **NREQ.1** - Use the PLL block if the MCU supports it.
+    * **NREQ.1.1** - Use the PLL block to multiply the MCU clock from 8MHz to 64MHz
 
 ## Configuration and Status
 
@@ -61,10 +61,12 @@ typedef struct
 
 ## Public API
 The following are the generic API for the RCC peripheral
-* `rcc_status rcc_osc_initialize( const rcc_oscillatorConfig *rccOscConfig )`
-* `rcc_status rcc_deinitialize( void )`
-* `rcc_status rcc_clock_initialize( const rcc_clockConfig *rccClkConfig )`
-* `rcc_status rcc_pll_initialize( const pll_configuration *pllConfig )`
+```c
+rcc_osc_initialize( const rcc_oscillatorConfig *rccOscConfig )
+rcc_deinitialize( void )
+rcc_clock_initialize( const rcc_clockConfig *rccClkConfig )
+rcc_pll_initialize( const pll_configuration *pllConfig )
+```
 
 ![RCC Peripheral](rendered_uml/rcc.png)
 
