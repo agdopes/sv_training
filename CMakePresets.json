@@ -14,7 +14,7 @@
             "generator": "Ninja",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "MCU": "STM32"
+                "MCU_FAMILY": "STM32"
             }
         },
         {
@@ -24,7 +24,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/arm-none-eabi-toolchain.cmake",
-                "STM32_SERIES": "F4"
+                "MCU_SERIES": "F4"
             }
         },
         {
@@ -34,7 +34,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/arm-none-eabi-toolchain.cmake",
-                "STM32_SERIES": "G0"
+                "MCU_SERIES": "G0"
             }
         },
         {
