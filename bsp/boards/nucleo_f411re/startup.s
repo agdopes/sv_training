@@ -1,6 +1,6 @@
 /**
  * @file startup.s
- * @brief Minimal startup for STM32F411RE
+ * @brief startup for STM32F411RE
  */
 
     .syntax unified

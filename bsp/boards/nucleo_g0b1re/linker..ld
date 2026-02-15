@@ -1,4 +1,4 @@
-ENTRY(Reset_Handler) /* entry point of the program.*/
+ENTRY(Reset_Handler)
 
 MEMORY
 {
@@ -15,14 +15,14 @@ SECTIONS
 {
 	.text :
 	{
-		*(.isr_vector) /* vector table of interrupts */
-		*(.text)	/* code */
+		*(.isr_vector)
+		*(.text)
 		*(.rodata)
 		. = ALIGN(4);
-		_etext = .; /* store value of location counter to symbol etext */
+		_etext = .;
 	} > FLASH
 
-	.data :/*initialized data */
+	.data :
 	{
 		_sdata = .;
 		*(.data)
@@ -30,7 +30,7 @@ SECTIONS
 		_edata = .;
 	} > RAM AT> FLASH
 
-	.bss :/*uninitialized data*/
+	.bss :
 	{
 		_sbss = .;
 		*(.bss)
