@@ -15,7 +15,7 @@ set(DRIVER_MCU_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${MCU_FAMILY_LOWER}${MCU_SERIES_
 
 if(NOT EXISTS ${DRIVER_MCU_DIR})
     message(FATAL_ERROR "Driver directory not found: ${DRIVER_MCU_DIR}\n"
-                        "Expected structure: drivers/${MCU_FAMILY_LOWER}${MCU_SERIES_LOWER}/")
+                        "Expected structure: hal/drivers/${MCU_FAMILY_LOWER}${MCU_SERIES_LOWER}/")
 endif()
 
 include(${DRIVER_MCU_DIR}/CMakeLists.txt)

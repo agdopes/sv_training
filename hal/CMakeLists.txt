@@ -1,17 +1,19 @@
-add_library(hal STATIC)
+add_subdirectory(drivers)
 
-target_sources(hal PRIVATE
-    src/hal_uart.c
-    src/hal_gpio.c
-    src/hal_common.c
+set(HAL_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/hal_gpio.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/hal_uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/hal_rcc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/hal_timer.c
 )
 
-target_include_directories(hal
+add_library(hal STATIC ${HAL_SOURCES})
+
+target_include_directories(hal 
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(hal
-    PRIVATE drivers
-    PRIVATE bsp
+target_link_libraries(hal 
+    PUBLIC drivers
+    PUBLIC bsp
 )
