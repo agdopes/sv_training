@@ -11,7 +11,19 @@ This contains the basic requirements for the TIMER peripheral and the high level
     * This will be use to trigger the 1ms interrupt for toggling the GPIO pin
 * **MREQ.4** - The HAL TIMER must be able to start and stop the timer during runtime
 * **MREQ.5** - The HAL TIMER must be able to get the current count of the timer
-<<<<<<< HEAD
+
+### Nice-to-have requirements
+* **NREQ.1** - Support the use of the input capture feature
+    * Can be used as a de-bounce for button press
+* **NREQ.2** - Support the PWM feature
+    * Can be use the dim the LED connected to the GPIO
+
+## Configuration and Status
+
+### GPIO Peripheral Status
+
+### Configuration Structure
+
 
 ### Nice-to-have requirements
 * **NREQ.1** - Support the use of the input capture feature
@@ -26,19 +38,3 @@ This contains the basic requirements for the TIMER peripheral and the high level
 ### Configuration Structure
 
 ## Public API
-=======
-
-### Nice-to-have requirements
-* **NREQ.1** - Support the use of the input capture feature
-    * Can be used as a de-bounce for button press
-* **NREQ.2** - Support the PWM feature
-    * Can be use the dim the LED connected to the GPIO
-
-## Configuration and Status
-
-### GPIO Peripheral Status
-
-### Configuration Structure
-
-## Public API
->>>>>>> 609e4e9 (Added the requirements for the HAL timer)
