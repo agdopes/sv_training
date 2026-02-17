@@ -1,3 +1,3 @@
 # Application subdirectories
 
-add_subdirectory(led_toggle)
+add_subdirectory(gpio_toggle)
