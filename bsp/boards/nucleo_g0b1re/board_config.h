@@ -31,4 +31,6 @@
 #define BOARD_UART_RX_PORT      0       // GPIOA
 #define BOARD_UART_RX_PIN       3       // PA3
 
+//GPIO config
+#define HAL_GPIO_BACKEND_STM32G0B1
 #endif // BOARD_CONFIG_H
