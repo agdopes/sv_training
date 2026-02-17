@@ -9,15 +9,18 @@
  * @{
  */
 
-#include "driver_gpio.h"
-#include "../inc/hal_gpio.h"
+
+#define HAL_GPIO_BACKEND_STM32G0B1
 
 #ifdef HAL_GPIO_BACKEND_STM32G0B1
+#include "driver_gpio.h"
+#include "hal_gpio.h"
 
-
-static void enable_gpio_clock(GPIO_TypeDef *GPIOx)
+static void enable_gpio_clock(uint32_t port_idx)
 {
-	//Call RCC clock enable IOPORT
+	//temporary gpio clock init
+	volatile uint32_t *RCC_IOPENR = (volatile uint32_t*)0x40021034UL;
+	*RCC_IOPENR |=  (1U<<port_idx);
 }
 
 /**
@@ -27,57 +30,77 @@ static void enable_gpio_clock(GPIO_TypeDef *GPIOx)
  * @param pin_config 
  * @return GPIO_OK on success, GPIO_ERROR on failure
  */
-static uint8_t stm32_gpio_init(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_config) {
+static uint8_t stm32_gpio_init(uint32_t index) {
 
-	enable_gpio_clock(GPIOx);
+	uint32_t pin = gpioConfig[index].pin;
+	uint32_t port_ix = gpioConfig[index].port;
+	uint32_t pinState = gpioConfig[index].pinState;
+	uint32_t pin_config = gpioConfig[index].pinConfig;
+
+	enable_gpio_clock(port_ix);
 
 	uint32_t tmp = (pin_config >> MODE_SHIFT) ;
-	setPinMode(GPIOA,pin,tmp);
+	setPinMode(port_ix,pin,tmp);
 
 	tmp = (pin_config >> SPEED_SHIFT);
-	setPinSpeed(GPIOA,pin,tmp);
+	setPinSpeed(port_ix,pin,tmp);
 
 	tmp = (pin_config >> PULL_SHIFT);
-	setPinPullDirection(GPIOA,pin,tmp);
+	setPinPullDirection(port_ix,pin,tmp);
+
+	if(pinState)
+		setPin(port_ix,pin);
+	else
+		resetPin(port_ix,pin);
 
 	return GPIO_OK;
 }
 
 
-static void stm32_gpio_deinit(GPIO_TypeDef *GPIOx,uint32_t pin) 
+static void stm32_gpio_deinit(uint32_t index) 
 {
-	setPinMode(GPIOx,pin,0U);
+	uint32_t pin = gpioConfig[index].pin;
+	uint32_t port_ix = gpioConfig[index].port;
 
-	setPinSpeed(GPIOx,pin,0U);
-
-	setPinPullDirection(GPIOx,pin,0U);
+	setPinMode(port_ix,pin,0U);
+	setPinSpeed(port_ix,pin,0U);
+	setPinPullDirection(port_ix,pin,0U);
 }
 
 
-static uint8_t stm32_gpio_pin_set(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_val) {
+static uint8_t stm32_gpio_pin_set(uint32_t index, uint32_t pin_val) {
+
+	uint32_t pin = gpioConfig[index].pin;
+	uint32_t port_ix = gpioConfig[index].port;
 
 	if(pin_val)
-		setPin(GPIOx,pin);
+		setPin(port_ix,pin);
 	else
-		resetPin(GPIOx,pin);
+		resetPin(port_ix,pin);
 
 	return GPIO_OK;
 }
 
 
-static uint8_t stm32_gpio_pin_read(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t *pin_val) 
+static uint8_t stm32_gpio_pin_read(uint32_t index, uint32_t *pin_val) 
 {
+	uint32_t pin = gpioConfig[index].pin;
+	uint32_t port_ix = gpioConfig[index].port;
+
 	//read pin
-	*pin_val = readPin(GPIOx,pin);
+	*pin_val = readPin(port_ix,pin);
 	return GPIO_OK;
 }
 
-static uint8_t stm32_gpio_pin_toggle(GPIO_TypeDef *GPIOx, uint32_t pin) 
+static uint8_t stm32_gpio_pin_toggle(uint32_t index) 
 {
-	if(getPinState(GPIOx,pin))
-		resetPin(GPIOx,pin);
+	uint32_t pin = gpioConfig[index].pin;
+	uint32_t port_ix = gpioConfig[index].port;
+
+	if(getPinState(port_ix,pin))
+		resetPin(port_ix,pin);
 	else
-		setPin(GPIOx,pin);
+		setPin(port_ix,pin);
 		
 	return GPIO_OK;
 }

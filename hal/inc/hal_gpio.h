@@ -15,18 +15,32 @@
 #include<stdint.h>
 #include "stm32g0xx.h"
 
+
+typedef struct
+{
+	uint32_t	pin;
+	uint32_t	port;
+	uint32_t	pinState;
+	uint32_t	pinConfig;
+
+}gpio_config;
+
+extern gpio_config gpioConfig[];
+
+
 /** @defgroup GPIO_Status GPIO Status Codes
  * @{
  */
 #define GPIO_OK             0  /**< Operation successful */
 #define GPIO_ERROR          1  /**< Generic error */
 #define GPIO_TIMEOUT        2  /**< Operation timed out */
-#define GPIO_BUSY           3  /**< Hardware busy */
-/** @} */
+#define GPIO_BUSY           3  /**< Hardware busy g/
+g** @} */
 
 /** @defgroup GPIO_PINS GPIO Pin Codes
  * @{
  */
+#define PIN0			0x0
 #define PIN1			0x1
 #define PIN2			0x2
 #define PIN3			0x3
@@ -93,14 +107,14 @@ struct gpio_hal_interface {
 	 * @param pin config (Mode | Speed | Pull)
      * @return GPIO_OK on success, error code otherwise
      */
-    uint8_t (*init)(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_config);
+    uint8_t (*init)(uint32_t index);
     
     /**
      * @brief Deinitialize GPIO instance
      * @param instance GPIO instance number
      * @param instance GPIO pin number
      */
-    void (*deinit)(GPIO_TypeDef *GPIOx,uint32_t pin);
+    void (*deinit)(uint32_t index);
     
     /**
 	 * @brief Set pin value
@@ -109,7 +123,7 @@ struct gpio_hal_interface {
      * @param pin value to write
      * @return GPIO_OK on success, error code otherwise
      */
-    uint8_t (*pin_set)(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_val);
+    uint8_t (*pin_set)(uint32_t index, uint32_t pin_val);
     
     /**
 	 * @brief Read Pin value 
@@ -118,11 +132,11 @@ struct gpio_hal_interface {
      * @param timeout_ms Timeout in milliseconds
      * @return GPIO_OK on success, error code otherwise
      */
-    uint8_t (*pin_read)(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t *pin_value);
+    uint8_t (*pin_read)(uint32_t index, uint32_t *pin_value);
 	
 
 
-    uint8_t (*pin_toggle)(GPIO_TypeDef *GPIOx, uint32_t pin);
+    uint8_t (*pin_toggle)(uint32_t index);
     
 };
 
@@ -142,8 +156,8 @@ const struct gpio_hal_interface* hal_gpio_get_interface(void);
  * @param config Pointer to GPIO configuration
  * @return UART_OK on success, error code otherwise
  */
-static inline uint8_t hal_gpio_init(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_config) {
-    return hal_gpio_get_interface()->init(GPIOx, pin, pin_config);
+static inline uint8_t hal_gpio_init(uint32_t index) {
+    return hal_gpio_get_interface()->init(index);
 }
 
 /**
@@ -151,8 +165,8 @@ static inline uint8_t hal_gpio_init(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t 
  * @param instance GPIO instance number
  * @param instance GPIO pin number
  */
-static inline void hal_gpio_deinit(GPIO_TypeDef *GPIOx,uint32_t pin) {
-    hal_gpio_get_interface()->deinit(GPIOx, pin);
+static inline void hal_gpio_deinit(uint32_t index) {
+    hal_gpio_get_interface()->deinit(index);
 }
 
 /**
@@ -162,8 +176,8 @@ static inline void hal_gpio_deinit(GPIO_TypeDef *GPIOx,uint32_t pin) {
  * @param pin value to write
  * @return GPIO_OK on success, error code otherwise
  */
-static inline uint8_t hal_gpio_pin_set(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pin_val) {
-	return hal_gpio_get_interface()->pin_set(GPIOx, pin, pin_val);
+static inline uint8_t hal_gpio_pin_set(uint32_t index, uint32_t pin_val) {
+	return hal_gpio_get_interface()->pin_set(index, pin_val);
 }
 
 /**
@@ -173,12 +187,12 @@ static inline uint8_t hal_gpio_pin_set(GPIO_TypeDef *GPIOx, uint32_t pin, uint32
  * @param timeout_ms Timeout in milliseconds
  * @return GPIO_OK on success, error code otherwise
  */
-static inline uint8_t hal_gpio_pin_read(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t *pin_val) {
-	return hal_gpio_get_interface()->pin_read(GPIOx, pin, pin_val);
+static inline uint8_t hal_gpio_pin_read(uint32_t index, uint32_t *pin_val) {
+	return hal_gpio_get_interface()->pin_read(index, pin_val);
 }
 
-static inline uint8_t hal_gpio_pin_toggle(GPIO_TypeDef *GPIOx, uint32_t pin) {
-	return hal_gpio_get_interface()->pin_toggle(GPIOx, pin);
+static inline uint8_t hal_gpio_pin_toggle(uint32_t index) {
+	return hal_gpio_get_interface()->pin_toggle(index);
 }
 
 #endif
