@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 project(training_app C ASM)
 
 add_executable(training_app
-    ${CMAKE_SOURCE_DIR}/hal/test_app/gpio/main.c
+    ${CMAKE_SOURCE_DIR}/app/main.c
     ${STARTUP_FILE}
 )
 
@@ -12,12 +12,12 @@ target_include_directories(training_app PRIVATE
 )
 
 target_link_libraries(training_app
-    PRIVATE hal        # App only links against HAL
+    PRIVATE hal
 )
 
-add_subdirectory(bsp)      # BSP first (provides config)
-add_subdirectory(hal)      # HAL last (uses drivers + bsp)
-
+add_subdirectory(bsp)
+add_subdirectory(hal)
+add_subdirectory(app)
 
 add_custom_command(TARGET training_app POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary training_app training_app.bin)

@@ -11,7 +11,6 @@
 
 
 
-#ifdef HAL_GPIO_BACKEND_STM32G0B1
 #include "driver_gpio.h"
 #include "hal_gpio.h"
 
@@ -116,4 +115,3 @@ const struct gpio_hal_interface* hal_gpio_get_interface(void) {
     return &stm32_gpio_interface;
 }
 
-#endif
