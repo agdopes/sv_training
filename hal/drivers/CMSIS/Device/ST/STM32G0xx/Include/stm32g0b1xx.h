@@ -34,6 +34,8 @@
 
 #ifndef STM32G0B1xx_H
 #define STM32G0B1xx_H
+//define HAL_GPIO for stm32g0b1
+#define HAL_GPIO_BACKEND_STM32G0B1
 
 #ifdef __cplusplus
  extern "C" {

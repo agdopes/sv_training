@@ -13,7 +13,6 @@
 #define	HAL_GPIO_H
 
 #include<stdint.h>
-#include "stm32g0xx.h"
 
 
 typedef struct

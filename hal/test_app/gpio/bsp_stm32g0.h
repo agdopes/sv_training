@@ -26,7 +26,7 @@ typedef enum
 }gpio_index_t;
 
 gpio_config gpioConfig[] = {
-	[LED_PIN]={ .pin = PIN5, .port = GPIO_PORTA, .pinState = PIN_RESET,.pinConfig =	(OUTPUT_MODE | LOW_SPEED | PULL_DOWN)},
-	[BUTTON_PIN]={ .pin = PIN13, .port = GPIO_PORTC, .pinState = PIN_RESET,.pinConfig =	(INPUT_MODE | LOW_SPEED | PULL_DOWN)}
+	[LED_PIN]={ .pin = PIN5, .port = GPIO_PORTA, .pinState = PIN_RESET,.pinConfig =	(OUTPUT_MODE | LOW_SPEED | NO_PULL)},
+	[BUTTON_PIN]={ .pin = PIN13, .port = GPIO_PORTC, .pinState = PIN_RESET,.pinConfig =	(INPUT_MODE | LOW_SPEED | NO_PULL)}
 };
 

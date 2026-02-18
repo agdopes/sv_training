@@ -10,7 +10,6 @@
  */
 
 
-#define HAL_GPIO_BACKEND_STM32G0B1
 
 #ifdef HAL_GPIO_BACKEND_STM32G0B1
 #include "driver_gpio.h"
@@ -39,13 +38,13 @@ static uint8_t stm32_gpio_init(uint32_t index) {
 
 	enable_gpio_clock(port_ix);
 
-	uint32_t tmp = (pin_config >> MODE_SHIFT) ;
+	uint32_t tmp = (pin_config >> MODE_SHIFT) & MODE_MASK;
 	setPinMode(port_ix,pin,tmp);
 
-	tmp = (pin_config >> SPEED_SHIFT);
+	tmp = (pin_config >> SPEED_SHIFT) & SPEED_MASK;
 	setPinSpeed(port_ix,pin,tmp);
 
-	tmp = (pin_config >> PULL_SHIFT);
+	tmp = (pin_config >> PULL_SHIFT) & PULL_MASK;
 	setPinPullDirection(port_ix,pin,tmp);
 
 	if(pinState)
