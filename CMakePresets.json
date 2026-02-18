@@ -42,7 +42,8 @@
             "inherits": "stm32f4",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "BOARD_NAME": "nucleo_f411re"
+                "BOARD_NAME": "nucleo_f411re",
+                "MCU_DEVICE": "STM32F411xE"
             }
         },
         {
@@ -50,7 +51,8 @@
             "inherits": "stm32g0",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "BOARD_NAME": "nucleo_g0b1re"
+                "BOARD_NAME": "nucleo_g0b1re",
+                "MCU_DEVICE": "STM32G0B1xx"
             }
         }
     ],
