@@ -3,7 +3,7 @@
 
 int main(void) {
 
-	//uint32_t pin_state = 0;
+	uint32_t pin_state = 0;
 	//initialize GPIOA pin5 as LED output 
 	for(int i = 0; i < NUM_PINS;i++)
 	{
@@ -12,13 +12,16 @@ int main(void) {
 
 	while(1)
 	{
-		hal_gpio_pin_set(LED_PIN,1);
-		//hal_gpio_pin_toggle(LED_PIN);
+		if(pin_state == 0)
+		{
+			hal_gpio_pin_toggle(LED_PIN);	
+		}
+	
 		for (int i=0; i<1000000;i++)
 		{
 			//delay
 		}
-		//hal_gpio_pin_read(BUTTON_PIN, &pin_state);
+		hal_gpio_pin_read(BUTTON_PIN, &pin_state);
 	}
     return 0;
 }
