@@ -24,4 +24,17 @@ This contains the basic requirements for the TIMER peripheral and the high level
 
 ### Configuration Structure
 
+
+### Nice-to-have requirements
+* **NREQ.1** - Support the use of the input capture feature
+    * Can be used as a de-bounce for button press
+* **NREQ.2** - Support the PWM feature
+    * Can be use the dim the LED connected to the GPIO
+
+## Configuration and Status
+
+### GPIO Peripheral Status
+
+### Configuration Structure
+
 ## Public API

@@ -2,39 +2,68 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "default",
+            "name": "arm-base",
             "hidden": true,
+            "toolchainFile": "${sourceDir}/arm-none-eabi-toolchain.cmake",
+            "binaryDir": "${sourceDir}/build"
+        },
+        {
+            "name": "stm32",
+            "displayName": "STM32 Debug",
+            "inherits": "arm-base",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "MCU_FAMILY": "STM32"
             }
         },
         {
-            "name": "debug",
-            "displayName": "Debug",
-            "inherits": "default",
+            "name": "stm32f4",
+            "displayName": "STM32 F4 Series",
+            "inherits": "stm32",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/arm-none-eabi-toolchain.cmake",
+                "MCU_SERIES": "F4"
             }
         },
         {
-            "name": "release",
-            "displayName": "Release",
-            "inherits": "default",
+            "name": "stm32g0",
+            "displayName": "STM32 G0 Series",
+            "inherits": "stm32",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/arm-none-eabi-toolchain.cmake",
+                "MCU_SERIES": "G0"
+            }
+        },
+        {
+            "name": "stm32f411re",
+            "inherits": "stm32f4",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BOARD_NAME": "nucleo_f411re",
+                "MCU_DEVICE": "STM32F411xE"
+            }
+        },
+        {
+            "name": "stm32g0b1re",
+            "inherits": "stm32g0",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BOARD_NAME": "nucleo_g0b1re",
+                "MCU_DEVICE": "STM32G0B1xx"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "debug",
-            "configurePreset": "debug"
+            "name": "stm32f411re-debug",
+            "configurePreset": "stm32f411re"
         },
         {
-            "name": "release",
-            "configurePreset": "release"
+            "name": "stm32g0b1re-debug",
+            "configurePreset": "stm32g0b1re"
         }
     ]
 }
