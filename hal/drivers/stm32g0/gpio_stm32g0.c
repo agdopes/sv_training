@@ -36,3 +36,10 @@ uint32_t getPinState(uint32_t index, uint32_t pin)
 	return (GPIOx[index]->ODR & (1U << pin));
 }
 
+uint32_t setAlternateMode(uint32_t index, uint32_t pin, uint32_t altMode)
+{
+	if(pin < 8U)
+		GPIOx[index]->AFR[0] = (altMode << ((pin % 8) * 4));
+	else
+		GPIOx[index]->AFR[1] = (altMode << ((pin % 8) * 4));
+}

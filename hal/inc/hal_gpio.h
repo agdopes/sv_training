@@ -21,6 +21,7 @@ typedef struct
 	uint32_t	port;
 	uint32_t	pinState;
 	uint32_t	pinConfig;
+	uint32_t	alternate_mode;
 
 }gpio_config;
 
@@ -35,6 +36,19 @@ extern gpio_config gpioConfig[];
 #define GPIO_TIMEOUT        2  /**< Operation timed out */
 #define GPIO_BUSY           3  /**< Hardware busy g/
 g** @} */
+
+typedef enum
+{
+	AF0 = 0,
+	AF1,
+	AF2,
+	AF3,
+	AF4,
+	AF5,
+	AF6,
+	AF7
+}alt_func_t
+
 
 /** @defgroup GPIO_PINS GPIO Pin Codes
  * @{

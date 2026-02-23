@@ -40,6 +40,12 @@ static uint8_t stm32_gpio_init(uint32_t index) {
 	uint32_t tmp = (pin_config >> MODE_SHIFT) & MODE_MASK;
 	setPinMode(port_ix,pin,tmp);
 
+	if(pin_config & ALTERNATE_MODE)
+	{
+		uint32_t alternate_mode = gpioConfig[index].alternate_mode;
+		setAlternateMode(port_ix,pin,alternate_mode);
+	}
+
 	tmp = (pin_config >> SPEED_SHIFT) & SPEED_MASK;
 	setPinSpeed(port_ix,pin,tmp);
 
