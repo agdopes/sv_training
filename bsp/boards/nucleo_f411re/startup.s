@@ -38,7 +38,7 @@ Reset_Handler:
     beq 4f
     str r2, [r0], #4
     b 3b
-
+    bl SystemInit
     /* Call main */
 4:  bl main
 

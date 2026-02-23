@@ -15,6 +15,12 @@
 #define BOARD_PIN_LED           0
 #define BOARD_PIN_BUTTON        1
 
+// GPIO Config
+#define GPIOA                   0
+#define ALTERNATE_MODE           0x02U
+#define VERY_HIGH_SPEED          0x03U
+#define NO_PULL                  0x00U
+
 // LED Config
 #define BOARD_LED_PORT          0       // GPIOA
 #define BOARD_LED_PIN           5       // PA5

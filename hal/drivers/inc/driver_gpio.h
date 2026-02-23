@@ -1,22 +1,24 @@
-#ifndef STM32G0xx_LLD_GPIO_H
-#define STM32G0xx_LLD_GPIO_H
+#ifndef LLD_GPIO_H
+#define LLD_GPIO_H
 
 
-#include "stm32g0xx.h"
+#include <stdint.h>
 
-void setPinMode(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t mode);
 
-void setPinSpeed(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t speed);
+void setPinMode(uint32_t index, uint32_t pin, uint32_t mode);
 
-void setPinPullDirection(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t pupdr);
+void setPinSpeed(uint32_t index, uint32_t pin, uint32_t speed);
 
-void setPin(GPIO_TypeDef *GPIOx, uint32_t pin);
+void setPinPullDirection(uint32_t index, uint32_t pin, uint32_t pupdr);
 
-void resetPin(GPIO_TypeDef *GPIOx, uint32_t pin);
+void setPin(uint32_t index, uint32_t pin);
 
-uint32_t readPin(GPIO_TypeDef *GPIOx, uint32_t pin);
+void resetPin(uint32_t index, uint32_t pin);
 
-uint32_t getPinState(GPIO_TypeDef *GPIOx, uint32_t pin);
+uint32_t readPin(uint32_t index, uint32_t pin);
 
+uint32_t getPinState(uint32_t index, uint32_t pin);
+
+void drivers_gpio_init(void* port, uint32_t pin, uint32_t mode, uint32_t alternate);
 
 #endif
