@@ -18,5 +18,5 @@ target_include_directories(bsp INTERFACE
 
 target_sources(bsp PUBLIC ${BSP_BOARD_DIR}/system_stm32f4xx.c)
 
-set(STARTUP_FILE "${BSP_BOARD_DIR}/startup.s" PARENT_SCOPE)
+set(STARTUP_FILE "${BSP_BOARD_DIR}/startup.c" PARENT_SCOPE)
 set(LINKER_SCRIPT "${BSP_BOARD_DIR}/linker.ld" PARENT_SCOPE)
