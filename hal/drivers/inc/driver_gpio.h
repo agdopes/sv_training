@@ -1,9 +1,7 @@
 #ifndef LLD_GPIO_H
 #define LLD_GPIO_H
 
-
 #include <stdint.h>
-
 
 void setPinMode(uint32_t index, uint32_t pin, uint32_t mode);
 

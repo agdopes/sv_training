@@ -47,7 +47,7 @@ typedef enum
 	AF5,
 	AF6,
 	AF7
-}alt_func_t
+}alt_func_t;
 
 
 /** @defgroup GPIO_PINS GPIO Pin Codes
