@@ -1,3 +1,3 @@
-# Add application subdirectories
-add_subdirectory(uart_poll)
-add_subdirectory(uart_interrupt)
+# Application subdirectories
+
+# add_subdirectory(gpio_toggle)
