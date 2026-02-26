@@ -1,5 +1,5 @@
 /**
- * @file hal_gpio_stm32G0B1.c
+ * @file hal_gpio.c
  * @brief GPIO HAL implementation for STM32G0B1RE
  * Provides hardware-specific GPIO implementation for STM32G0B1RE microcontroller.
  * Implements the gpio_hal_interface for direct register access.
