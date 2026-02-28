@@ -17,7 +17,7 @@ uint32_t readPin(uint32_t index, uint32_t pin);
 
 uint32_t getPinState(uint32_t index, uint32_t pin);
 
-uint32_t setAlternateMode(uint32_t index, uint32_t pin, uint32_t altMode);
+void setAlternateMode(uint32_t index, uint32_t pin, uint32_t altMode);
 
 
 #endif

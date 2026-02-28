@@ -34,8 +34,8 @@ extern gpio_config gpioConfig[];
 #define GPIO_OK             0  /**< Operation successful */
 #define GPIO_ERROR          1  /**< Generic error */
 #define GPIO_TIMEOUT        2  /**< Operation timed out */
-#define GPIO_BUSY           3  /**< Hardware busy g/
-g** @} */
+#define GPIO_BUSY           3  /**< Hardware busy */
+/** @} */
 
 typedef enum
 {
