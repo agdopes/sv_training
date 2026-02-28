@@ -17,7 +17,9 @@ add_executable(${PROJECT_NAME}
 	hal/testapp/gpio/system_stm32g0xx.c
 	bsp/boards/nucleo_g0b1re/startup_stm32g0b1retx.s
 	hal/src/hal_gpio.c
+	hal/src/hal_rcc.c
 	hal/drivers/stm32g0/gpio_stm32g0.c
+	hal/drivers/stm32g0/rcc_stm32g0.c
 )
 target_include_directories(${PROJECT_NAME}
 	PUBLIC
